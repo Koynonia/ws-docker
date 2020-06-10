@@ -1,0 +1,100 @@
+version: '3.0'
+
+networks: 
+  dev-databases:
+
+services: 
+  
+  cache-server:
+    image: redis:alpine
+    container_name: redis
+    command: redis-server --requirepass Passw0rd!
+    ports: 
+      - 6379:6379
+    volumes: 
+      - $PWD/redis-data:/var/lib/redis
+    networks: 
+      - dev-databases
+
+  postgres-server:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      # Permitir conexão sem senha
+      #- POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=Passw0rd!
+      #- POSTGRES_DB=teste
+    volumes: 
+      - $PWD/postgres-data:/var/lib/postgresql/data    
+    networks: 
+      - dev-databases
+
+  mysql-server:
+    image: mysql:latest
+    container_name: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      # Permitir conexão sem senha
+      #- MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_USER=admin
+      - MYSQL_ROOT_PASSWORD=Passw0rd!
+      #- MYSQL_DATABASE=teste
+    ports: 
+      - 3306:3306
+    volumes: 
+      - $PWD/mysql-data:/var/lib/mysql
+    networks: 
+      - dev-databases
+
+  nosql-server:
+    image: mongo:latest
+    container_name: mongo
+    environment: 
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=Passw0rd!
+    ports: 
+      - 27017:27017
+    volumes: 
+      - $PWD/mongo-data:/var/lib/mongo
+    networks: 
+      - dev-databases
+
+  msql-server:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sqlserver
+    environment: 
+      - SA_PASSWORD=Passw0rd!
+      - ACCEPT_EULA=Y
+    ports: 
+      - 1433:1433
+    volumes: 
+      - $PWD/sqlserver-data:/var/lib/sqlserver
+    networks: 
+      - dev-databases
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    ports:
+      - 8080:8080
+    networks:
+      - dev-databases
+    depends_on: 
+      - mysql-server
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo-express
+    environment: 
+      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=Passw0rd!
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=Passw0rd!
+    ports: 
+      - 8081:8081
+    networks: 
+      - dev-databases
+    depends_on: 
+      - nosql-server
