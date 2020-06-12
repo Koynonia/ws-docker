@@ -1,0 +1,212 @@
+openapi: 3.0.0
+
+info:
+  title: 'Especificação para a Criação da conta de de Usuário'
+  description: 'Especificação para a Criação da conta de de Usuário'
+  version: '1.0.0'
+  contact:
+    name: Fernando M. Oliveira
+    email: fernando@email.com
+security:
+  - application:
+    - read
+    - write
+
+paths:
+  /accounts:
+    parameters:
+      - name: token
+        in: header 
+        required: true
+        description: Token JWT no header
+        schema:
+          type: array
+          items:
+            type: string
+            format: string
+        style: simple
+        example: >-
+          asdjfhdfiwueyrieueirytkjjfh
+    get:
+      summary: Recuperar todas as contas
+      responses:
+        200:
+          description: OK
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/body_response' 
+        400:
+          description: Dados request enviados incorretos
+        401:
+          description: Token inválido, inexistente ou expirado
+        500:
+          description: Erro no servidor
+    post:
+      summary: Cria uma nova conta
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/body_request'
+      responses:
+        201:
+          description: Criado
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/body_response' 
+        400:
+          description: Dados request enviados incorretos
+        401:
+          description: Token inválido, inexistente ou expirado
+        500:
+          description: Erro no servidor
+  /accounts/{id}:
+    parameters:
+      - name: id
+        in: path
+        required:  true
+        description:  Id da identificação da conta de Usuário
+        schema:
+          type: string
+      - name: token
+        in: header 
+        required: true
+        description: Token JWT no header
+        schema:
+          type: array
+          items:
+            type: string
+            format: string
+        style: simple
+        example: >-
+          asdjfhdfiwueyrieueirytkjjfh
+    get:
+      summary: Recuperar uma conta de Usuário pelo Id
+      responses:
+        200:
+          description: OK
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/body_response' 
+        400:
+          description: Dados request enviados incorretos
+        401:
+          description: Token inválido, inexistente ou expirado
+        404:
+          description: recurso {id} não encontrado
+        500:
+          description: Erro no servidor
+    put:
+      summary: Atualizar uma conta de Usuário pelo Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/body_request'
+      responses:
+        202:
+          description: Aceito
+        400:
+          description: Dados request enviados incorretos
+        401:
+          description: Token inválido, inexistente ou expirado
+        404:
+          description: recurso {id} não encontrado
+        500:
+          description: Erro no servidor
+    delete:
+      summary: Excluir uma conta de Usuário pelo Id
+      responses:
+        204:
+          description: Sem conteúdo
+        400:
+          description: Dados request enviados incorretos 
+        401:
+          description: Token inválido, inexistente ou expirado
+        404:
+          description: recurso {id} não encontrado
+        500:
+          description: Erro no servidor 
+
+components:
+  schemas:
+    body_response:
+      type: object
+      required:
+        - id
+        - firstName
+        - lastName
+        - email
+        - phoneNumber
+        - dateBirth
+        - gender
+      properties:
+          id:
+            type: integer
+            example: 1
+          firstName:
+            type: string
+            example: First
+          lastName:
+            type: string
+            example: Last
+          email:
+            type: string
+            format: email
+            example: admin@admin.com
+          phoneNumber:
+            type: number
+            example: 5555-5555          
+          dateBirth:
+            type: string
+            format: date
+            example: 10/12/2000
+          gender:
+            type: string
+            example: M
+            enum:
+              - M
+              - F
+    body_request:
+      type: object
+      required:
+        - firstName
+        - lastName
+        - email
+        - password
+        - phoneNumber
+        - dateBirth
+        - gender
+      properties:
+          firstName:
+            type: string
+            example: First
+          lastName:
+            type: string
+            example: Last
+          email:
+            type: string
+            format: email
+            example: admin@admin.com
+          password:
+            type: string
+            format: password
+            example: 123
+          phoneNumber:
+            type: number
+            example: 5555-5555          
+          dateBirth:
+            type: string
+            format: date
+            example: 10/12/2000
+          gender:
+            type: string
+            example: M
+            enum:
+              - M
+              - F
