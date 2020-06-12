@@ -1,0 +1,73 @@
+openapi: 3.0.0
+
+info:
+  title: 'Especificação Autenticação de Usuário'
+  description: 'Especificação Autenticação de Usuário'
+  version: '1.0.0'
+  contact:
+    name: Fernando M. Oliveira
+    email: fernando@email.com
+paths:
+  /login:
+    post:
+      description: Describe this route
+      summary: Login do usuário
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/body_request'            
+      responses:
+        200:
+          description: OK
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/body_response'
+        400:
+          description: Dados request enviados incorretos
+        401:
+          description: Password incorreto
+        404:
+          description: Usuário não encontrado
+        500:
+          description: Erro no servidor
+components:
+  schemas:
+    body_request:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          minimum: 1
+          example: admin
+          format: email
+        password:
+          type: string
+          minimum: 1
+          example: 123
+          format: password
+    body_response:
+      type: object
+      required:
+        - token
+        - id
+        - email
+        - firstName
+        - lastName
+      properties:
+        token:
+          type: string
+          example: >-
+            wekjkjerkjekekgg
+        account:
+          type: string
+          example:
+            id: 1
+            email: admin@adim.com
+            firstName: First
+            lastName: Last
