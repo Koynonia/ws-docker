@@ -37,9 +37,9 @@
 | :---: | :--- |
 |17|[Introdução e conhecendo o Open API](./doc/openapi.md)|
 |18|[Conhecendo o Swagger Edit e UI](./doc/swagger.md)|
-|19|[Escrevendo a 1ª especificação OpenAPI 3.0](project-children-progress/especificacao_autenticacao_usuario.yml)|
-|20|[Escrevendo a 2ª especificação OpenAPI 3.0](project-children-progress/especificacao_criacao_conta_usuario.yml)|
-|21|[Escrevendo a 3ª especificação OpenAPI 3.0](project-children-progress/expecificacao_inclusao_dados_crianca.yml)|
+|19|[Escrevendo a 1ª especificação OpenAPI 3.0](./project-children-progress/especificacao_autenticacao_usuario.yml)|
+|20|[Escrevendo a 2ª especificação OpenAPI 3.0](./project-children-progress/especificacao_criacao_conta_usuario.yml)|
+|21|[Escrevendo a 3ª especificação OpenAPI 3.0](./project-children-progress/expecificacao_inclusao_dados_crianca.yml)|
 |22|Escrevendo a 4ª especificação OpenAPI 3.0|
 
 ### Seção 5: Conclusão
