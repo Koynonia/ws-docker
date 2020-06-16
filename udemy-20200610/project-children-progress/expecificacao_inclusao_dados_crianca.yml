@@ -43,7 +43,7 @@ paths:
         500:
           description: Erro no servidor
     post:
-      summary: Cria uma nova conta
+      summary: Criar um novo progresso
       requestBody:
         required: true
         content:
@@ -63,7 +63,75 @@ paths:
           description: Token inválido, inexistente ou expirado
         500:
           description: Erro no servidor
-
+  /progress/{id}:
+    parameters:
+      - name: id
+        in: path
+        required:  true
+        description:  Id da identificação do progresso
+        schema:
+          type: string
+      - name: token
+        in: header 
+        required: true
+        description: Token JWT no header
+        schema:
+          type: array
+          items:
+            type: string
+            format: string
+        style: simple
+        example: >-
+          asdjfhdfiwueyrieueirytkjjfh
+    get:
+      summary: Recuperar um progresso pelo Id
+      responses:
+        200:
+          description: OK
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/body_response' 
+        400:
+          description: Dados request enviados incorretos
+        401:
+          description: Token inválido, inexistente ou expirado
+        404:
+          description: recurso {id} não encontrado
+        500:
+          description: Erro no servidor
+    put:
+      summary: Atualizar um progresso pelo Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/body_request'
+      responses:
+        202:
+          description: Aceito
+        400:
+          description: Dados request enviados incorretos
+        401:
+          description: Token inválido, inexistente ou expirado
+        404:
+          description: recurso {id} não encontrado
+        500:
+          description: Erro no servidor
+    delete:
+      summary: Excluir um progresso pelo Id
+      responses:
+        204:
+          description: Sem conteúdo
+        400:
+          description: Dados request enviados incorretos 
+        401:
+          description: Token inválido, inexistente ou expirado
+        404:
+          description: recurso {id} não encontrado
+        500:
+          description: Erro no servidor
 
 components:
   schemas:
