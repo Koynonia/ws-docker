@@ -1,0 +1,112 @@
+openapi: 3.0.0
+
+info:
+  title: 'Especificação relatório de desempenho de crescimento da criança'
+  description: 'Especificação relatório de desempenho de crescimento da criança'
+  version: '1.0.0'
+  contact:
+    name: Fernando M. Oliveira
+    email: fernando@email.com
+security:
+  - application:
+    - read
+    - write
+
+paths:
+  /accounts/{email}/progress:
+    parameters:
+      - name: email
+        in: path
+        required:  true
+        description:  Email da identificação da conta de Usuário
+        schema:
+          type: string
+      - name: token
+        in: header 
+        required: true
+        description: Token JWT no header
+        schema:
+          type: array
+          items:
+            type: string
+            format: string
+        style: simple
+        example: >-
+          asdjfhdfiwueyrieueirytkjjfh
+    get:
+      summary: Recuperar progresso de crescimento das crianças pelo email da conta de usuário
+      responses:
+        200:
+          description: OK
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/body_response' 
+        400:
+          description: Dados request enviados incorretos
+        401:
+          description: Token inválido, inexistente ou expirado
+        404:
+          description: recurso {email} não encontrado
+        500:
+          description: Erro no servidor
+
+components:
+  schemas:
+    body_response:
+      type: object
+      required:
+        - height
+        - weight
+        - headCircumference
+        - dateProgress
+        - account
+      properties:
+        height:
+          type: number
+          example: 1,02
+        weight:
+          type: number
+          example: 45
+        headCircumference:
+          type: number
+          example: 0,48
+        dataProgress:
+          type: string
+          format: date
+          example: 12/12/2000
+        account:
+          type: object
+          required:
+            - firstName
+            - lastName
+            - email
+            - password
+            - dateBirth
+            - gender
+          properties:
+              firstName:
+                type: string
+                example: First
+              lastName:
+                type: string
+                example: Last
+              email:
+                type: string
+                format: email
+                example: admin@admin.com
+              password:
+                type: string
+                format: password
+                example: 123        
+              dateBirth:
+                type: string
+                format: date
+                example: 10/12/2000
+              gender:
+                type: string
+                example: M
+                enum:
+                  - M
+                  - F
+ 

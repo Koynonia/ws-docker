@@ -35,6 +35,6 @@ Conforme os [requisitos](requirements.md), segue o planejamento abaixo.
 |2|[Métodos de requisição HTTP](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Methods)|
 |3|[Códigos de status de respostas HTTP](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Status)
 |4|[Link do convite do projeto no Trello](https://trello.com/invite/b/4eTU8iBJ/5ff76a13305f4b06d39fcf4e9c8b7bac/aprenda-a-criar-especifica%C3%A7%C3%B5es-de-apis-com-swagger-e-openap)
-|5|[API criada da 2ª Especificação](../project-children-progress/especificacao_criacao_conta_usuario.yml)|
+|5|[API criada da 2ª Especificação](../project-children-progress/especificacao_relatorio_crescimento.yml)|
 
 [Voltar](../README.md)
