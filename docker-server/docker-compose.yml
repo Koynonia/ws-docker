@@ -1,100 +1,110 @@
 version: '3.0'
 
-networks: 
-  dev-databases:
-
 services: 
   
-  cache-server:
+  server-cache:
     image: redis:alpine
     container_name: redis
+    #restart: always
     command: redis-server --requirepass Passw0rd!
     ports: 
       - 6379:6379
     volumes: 
-      - $PWD/redis-data:/var/lib/redis
+      - data-redis:/var/lib/redis
     networks: 
-      - dev-databases
+      - net-database
 
-  postgres-server:
+  server-mysql:
+    image: bitnami/mysql:latest
+    container_name: mysql
+    #restart: always
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      #- BITNAMI_DEBUG=true
+    ports: 
+      - 3306:3306
+    volumes: 
+      - data-mysql:/bitnami/mysql/data
+    networks: 
+      - net-database
+
+  server-mongodb:
+    image: bitnami/mongodb:latest
+    container_name: mongodb
+    #restart: always
+    ports: 
+      - 27017:27017
+    volumes: 
+      - data-mongo:/data/db
+    networks: 
+      - net-database
+
+  server-postgres:
     image: postgres:latest
     container_name: postgres
+    #restart: always
     environment:
       # Permitir conexão sem senha
       #- POSTGRES_HOST_AUTH_METHOD=trust
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=Passw0rd!
       #- POSTGRES_DB=teste
-    volumes: 
-      - $PWD/postgres-data:/var/lib/postgresql/data    
-    networks: 
-      - dev-databases
-
-  mysql-server:
-    image: mysql:latest
-    container_name: mysql
-    command: --default-authentication-plugin=mysql_native_password
-    environment:
-      # Permitir conexão sem senha
-      #- MYSQL_ALLOW_EMPTY_PASSWORD=yes
-      - MYSQL_USER=admin
-      - MYSQL_ROOT_PASSWORD=Passw0rd!
-      #- MYSQL_DATABASE=teste
     ports: 
-      - 3306:3306
+      - 5432:5432
     volumes: 
-      - $PWD/mysql-data:/var/lib/mysql
+      - data-postgres:/var/lib/postgresql/data    
     networks: 
-      - dev-databases
+      - net-database
 
-  nosql-server:
-    image: mongo:latest
-    container_name: mongo
-    environment: 
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=Passw0rd!
-    ports: 
-      - 27017:27017
-    volumes: 
-      - $PWD/mongo-data:/var/lib/mongo
-    networks: 
-      - dev-databases
-
-  msql-server:
+  server-msql:
     image: mcr.microsoft.com/mssql/server:2019-latest
     container_name: sqlserver
+    #restart: always
     environment: 
       - SA_PASSWORD=Passw0rd!
       - ACCEPT_EULA=Y
     ports: 
       - 1433:1433
     volumes: 
-      - $PWD/sqlserver-data:/var/lib/sqlserver
+      - data-sqlserver:/var/lib/sqlserver
     networks: 
-      - dev-databases
+      - net-database
 
-  adminer:
+  client-mysql:
     image: adminer
-    container_name: adminer
+    container_name: client-mysql
     ports:
       - 8080:8080
     networks:
-      - dev-databases
+      - net-database
     depends_on: 
-      - mysql-server
+      - server-mysql
 
-  mongo-express:
+  client-mongodb:
     image: mongo-express:latest
-    container_name: mongo-express
+    container_name: client-mongodb
     environment: 
-      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_MONGODB_SERVER=server-mongodb
+      - ME_CONFIG_MONGODB_ENABLE_ADMIN='false'
+      #- ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      #- ME_CONFIG_MONGODB_ADMINPASSWORD:Passw0rd!
+      - ME_CONFIG_BASICAUTH_USERNAME=user
       - ME_CONFIG_BASICAUTH_PASSWORD=Passw0rd!
-      - ME_CONFIG_MONGODB_PORT=27017
-      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
-      - ME_CONFIG_MONGODB_ADMINPASSWORD=Passw0rd!
+      #- ME_CONFIG_MONGODB_PORT: 27017
     ports: 
       - 8081:8081
     networks: 
-      - dev-databases
+      - net-database
     depends_on: 
-      - nosql-server
+      - server-mongodb
+
+volumes:
+  data-redis:
+  data-mysql:
+  data-mongo:
+  data-postgres:
+  data-sqlserver:
+
+networks: 
+  net-database: 
+    driver: bridge
