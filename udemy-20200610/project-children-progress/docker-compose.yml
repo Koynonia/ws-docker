@@ -1,0 +1,35 @@
+version: '3.1'
+services: 
+
+  server-mongodb:
+    container_name: mongodb
+    image: bitnami/mongodb:latest
+    restart: always
+    volumes: 
+      - $PWD/data-mongo:/data/db
+    ports: 
+      - 27017:27017
+    networks: 
+      - net-database
+
+  client-mongodb:
+    container_name: client-mongodb
+    image: mongo-express
+    restart: always
+    ports: 
+      - 8081:8081
+    environment: 
+      ME_CONFIG_MONGODB_SERVER: server-mongodb
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: 'false'
+      ME_CONFIG_BASICAUTH_USERNAME: user
+      ME_CONFIG_BASICAUTH_PASSWORD: Passw0rd!
+    networks: 
+     - net-database
+    depends_on: 
+      - server-mongodb
+
+volumes: 
+  data-mongo: 
+networks: 
+  net-database: 
+    driver: bridge
