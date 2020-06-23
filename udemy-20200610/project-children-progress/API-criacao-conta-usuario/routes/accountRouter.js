@@ -18,7 +18,7 @@ accountRouter
       if (token) {
         jwt.verify(token, process.env.SECRET, function (err, decoded) {
           if (err) {
-            resp.statusMessage = "Unauthorized!";
+            resp.statusMessage = "Unauthorized";
             resp.status(401).json({
               condigo: "2",
               mensagem: "Token inválido, inexistente ou expirado!",
@@ -36,7 +36,7 @@ accountRouter
               },
               (err, account) => {
                 if (err) {
-                  resp.statusMessage = "Unauthorized!";
+                  resp.statusMessage = "Bad request";
                   resp.status(400).json({
                     condigo: "3",
                     mensagem: "Dados request enviados incorretos!",
@@ -50,7 +50,7 @@ accountRouter
           }
         });
       } else {
-        resp.statusMessage = "Unauthorized!";
+        resp.statusMessage = "Unauthorized";
         resp.status(401).json({
           condigo: "2",
           mensagem: "Token inválido, inexistente ou expirado!",
@@ -58,7 +58,7 @@ accountRouter
       }
     } catch (error) {
       console.error(error);
-      resp.statusMessage = "Internal error!";
+      resp.statusMessage = "Internal error";
       resp.status(500).json({
         condigo: "1",
         mensagem: "Erro no servidor!",
@@ -98,7 +98,7 @@ accountRouter
                 /* Deletado o atributo password do objeto account */
                 let accountAux = account.toObject();
                 delete accountAux["password"];
-                resp.status(201).json(account);
+                resp.status(201).json(accountAux);
               }
             });
           }

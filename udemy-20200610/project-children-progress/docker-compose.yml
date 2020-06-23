@@ -6,7 +6,7 @@ services:
     image: bitnami/mongodb:latest
     restart: always
     volumes: 
-      - $PWD/data-mongo:/data/db
+      - /data-mongo:/data/db
     ports: 
       - 27017:27017
     networks: 

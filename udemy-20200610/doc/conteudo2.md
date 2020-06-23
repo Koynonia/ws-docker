@@ -81,5 +81,6 @@ Implementação de 4 microsserviços, das 4 APIs, continuando o que foi feito no
 |22|[Criando e estruturando o projeto da API](suport.md#comandos)|
 |23|[Convertendo o projeto para ECMAScript 06 e iniciando API](suport.md#es6)|
 |24|[API Criação da conta de usuário](api-conta-usuario.md)|
+|25|[API Autenticação de usuário](api-autenticacao-usuario.md)|
 
 [Voltar](../README.md)

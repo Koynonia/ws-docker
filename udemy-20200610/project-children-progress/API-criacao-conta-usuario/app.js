@@ -1,6 +1,5 @@
 import express from "express";
 import mongoose from "mongoose";
-import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 import Cryptr from "cryptr";
@@ -26,7 +25,7 @@ db.on("error", console.error.bind(console, "[app.js] Erro de conexão!"));
 db.collection("accounts").findOne({}, function (err, result) {
   if (err) throw err;
   if (!result) {
-      init();
+    init();
   }
 });
 
@@ -53,7 +52,6 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/accounts", accountRouter);
 
