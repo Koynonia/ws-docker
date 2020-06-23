@@ -1,4 +1,4 @@
-# Implementtando APIs com Apigee + Node.js + Docker + Heroku
+# Implementando APIs com Apigee + Node.js + Docker + Heroku
 
 [Voltar](../README.md)
 
