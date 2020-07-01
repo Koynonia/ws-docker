@@ -3,7 +3,7 @@
 
 [Voltar](conteudo2.md)
 
-A implementação segue praticamente os mesmos moldes da [API Criação da conta de usuário](api-autenticacao-usuario.md).
+A implementação segue praticamente os mesmos moldes da [API Criação da conta de usuário](api-conta-usuario.md)).
 
 |Sequência|Recurso|Detalhe|
 |:--:|:--|:--|

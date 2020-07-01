@@ -136,14 +136,21 @@ accountRouter.use("/:id", (req, resp, next) => {
         } else if (decoded) {
           /* Busca pelo Id */
           AccountModel.findById(req.params.id, (err, account) => {
-            if (err || !account) {
+            if (err) {
               console.error(err);
+              resp.statusMessage = "Bad request";
+              resp.status(400).json({
+                condigo: "3",
+                mensagem: "Dados request enviados incorretos!",
+              });
+            } else if (!account){
               resp.statusMessage = "Not found";
               resp.status(404).json({
                 condigo: "4",
                 mensagem: `Recurso ${req.params.id} não encontrado!`,
               });
-            } else {
+            }
+            else {
               /* Permite continuar o processamento */
               req.account = account;
               next();
@@ -199,7 +206,7 @@ accountRouter
         });
       } else {
         resp.statusMessage = "Aceito";
-        resp.status(201).send("");
+        resp.status(202).send("");
       }
     });
   })
