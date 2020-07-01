@@ -82,5 +82,13 @@ Implementação de 4 microsserviços, das 4 APIs, continuando o que foi feito no
 |23|[Convertendo o projeto para ECMAScript 06 e iniciando API](suport.md#es6)|
 |24|[API Criação da conta de usuário](api-conta-usuario.md)|
 |25|[API Autenticação de usuário](api-autenticacao-usuario.md)|
+|26|[API Inclusão dos dados de crescimento](api-inclusao-dados-crescimento.md)|
+|27|[API relatório de desempenho de crescimento da criança](API-relatorio-desempenho-crescimento.md)
+
+### Seção 5: Implementando os containers no Docker e deploy no Heroku
+
+| Item | Descrição |
+| :---: | :--- |
+|28|[Atualizando o Trello board e iniciando o build da API Criação da conta de usuário](heroku.md)|
 
 [Voltar](../README.md)
