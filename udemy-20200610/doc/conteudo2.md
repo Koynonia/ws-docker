@@ -71,8 +71,8 @@ Implementação de 4 microsserviços, das 4 APIs, continuando o que foi feito no
 | :---: | :--- |
 |18|Implementar a criação da conta de usuário - [Link do projeto no Trello](https://trello.com/b/jpXdIVKM)|
 |19|Implementar a autenticação do usuário|
-|20|Implementar a inclusão dos dados de crescimento da criança|
-|21|Implementar o relatório de desenvolvimento de crescimento da criança|
+|20|Implementar a inclusão dos dados de crescimento|
+|21|Implementar o relatório de desenvolvimento de crescimento|
 
 ### Seção 4: Implementando no Node.JS + Express + MongoDB
 
@@ -83,7 +83,7 @@ Implementação de 4 microsserviços, das 4 APIs, continuando o que foi feito no
 |24|[API Criação da conta de usuário](api-conta-usuario.md)|
 |25|[API Autenticação de usuário](api-autenticacao-usuario.md)|
 |26|[API Inclusão dos dados de crescimento](api-inclusao-dados-crescimento.md)|
-|27|[API Relatório de desempenho de crescimento da criança](api-relatorio-desempenho-crescimento.md)
+|27|[API Relatório de desempenho de crescimento](api-relatorio-desempenho-crescimento.md)|
 
 ### Seção 5: Implementando os containers no Docker e deploy no Heroku
 
@@ -92,6 +92,6 @@ Implementação de 4 microsserviços, das 4 APIs, continuando o que foi feito no
 |28|[Build e deploy da API Criação da conta de usuário](heroku.md)|
 |29|[Build e deploy da API Autenticação de usuário](heroku.md)|
 |30|[Build e deploy da API Inclusão dos dados de crescimento](heroku.md)|
-|31|[Build e deploy da API Relatório de desempenho de crescimento da criança](heroku.md)|
+|31|[Build e deploy da API Relatório de desempenho de crescimento](heroku.md)|
 
 [Voltar](../README.md)
