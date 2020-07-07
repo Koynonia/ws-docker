@@ -94,4 +94,10 @@ Implementação de 4 microsserviços, das 4 APIs, continuando o que foi feito no
 |30|[Build e deploy da API Inclusão dos dados de crescimento](heroku.md)|
 |31|[Build e deploy da API Relatório de desempenho de crescimento](heroku.md)|
 
+### Seção 6: Gerencindos as APIs no Apigee
+
+| Item | Descrição |
+| :---: | :--- |
+|32|[Criando Apigee proxy para a API Autenticação de usuário](apigee.md)|
+
 [Voltar](../README.md)

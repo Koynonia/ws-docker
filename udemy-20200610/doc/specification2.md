@@ -8,7 +8,7 @@ Conforme os [requisitos](requirements.md), segue o planejamento abaixo.
   /accounts GET
   /accounts POST
   /accounts/{id} GET
-  /accounts/{id} PUT 
+  /accounts/{id} PUT
   /accounts/{id} DELETE
 - **Quais são os parâmetros do request?**
   token JWT HEADER
